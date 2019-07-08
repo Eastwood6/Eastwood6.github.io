@@ -36,7 +36,7 @@
 <p><strong>set JAVA_OPTS</strong>把这一句替换为：</p>
 <p><code>set JAVA_OPTS=%JAVA_OPTS% -server  -XX:MaxNewSize=256m</code></p>
 <p>####三、保存重启后，又出现如下错误</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Eastwood6/Eastwood6.github.io@master/img/1562151422594.png" alt="1562151422594"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/Eastwood6/Eastwood6.github.io@master/img/blog/1562151422594.png" alt="1562151422594"></p>
 <p>一看就是server.xml没以<code>&lt;/Host&gt;</code>结束 </p>
 <h4 id="四、再次保存重启后，又出现如下错误"><a href="#四、再次保存重启后，又出现如下错误" class="headerlink" title="四、再次保存重启后，又出现如下错误"></a>四、再次保存重启后，又出现如下错误</h4><p><code>java.net.BindException: Address already in use: JVM_Bind</code></p>
 <p> 后来发现原来是在任务管理器中已经打开了一个JVM_Bind,是原来的javaw.exe没有结束掉而又新创建了一个javaw.exe进程。解决方法：打开任务管理器，结束javaw.exe任务，重启tomcat服务器即可。 </p>
