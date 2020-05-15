@@ -1,0 +1,498 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>git pro notes | Eastwood</title><meta name="description" content="git pro notes"><meta name="keywords" content="-Git"><meta name="author" content="文 栋"><meta name="copyright" content="文 栋"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="canonical" href="http://www.eastwo.com/2020/05/15/Git Pro Notes/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="git pro notes"><meta name="twitter:description" content="git pro notes"><meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Eastwood6/Eastwood6.github.io@master/img/https.jpg"><meta property="og:type" content="article"><meta property="og:title" content="git pro notes"><meta property="og:url" content="http://www.eastwo.com/2020/05/15/Git Pro Notes/"><meta property="og:site_name" content="Eastwood"><meta property="og:description" content="git pro notes"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/Eastwood6/Eastwood6.github.io@master/img/https.jpg"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="next" title="Hexo Grammar" href="http://www.eastwo.com/2020/05/15/Hexo Grammar/"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":1,"translateDelay":0,"cookieDomain":"http://www.eastwo.com/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight_copy: 'true',
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: '添加书签',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天'
+
+  
+}</script></head><body><canvas class="fireworks"></canvas><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Getting-Started"><span class="toc-number">1.</span> <span class="toc-text">Getting Started</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Basics"><span class="toc-number">2.</span> <span class="toc-text">Git Basics</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Branching"><span class="toc-number">3.</span> <span class="toc-text">Git Branching</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-on-the-Server"><span class="toc-number">4.</span> <span class="toc-text">Git on the Server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Distributed-Git"><span class="toc-number">5.</span> <span class="toc-text">Distributed Git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GitHub"><span class="toc-number">6.</span> <span class="toc-text">GitHub</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Task-Lists"><span class="toc-number">6.0.0.0.1.</span> <span class="toc-text">Task Lists:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Quoting"><span class="toc-number">6.0.0.0.2.</span> <span class="toc-text">Quoting:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Emoji"><span class="toc-number">6.0.0.0.3.</span> <span class="toc-text">Emoji:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Images"><span class="toc-number">6.0.0.0.4.</span> <span class="toc-text">Images:</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Tools"><span class="toc-number">7.</span> <span class="toc-text">Git Tools</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Customizing-Git"><span class="toc-number">8.</span> <span class="toc-text">Customizing Git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-and-Other-Systems"><span class="toc-number">9.</span> <span class="toc-text">Git and Other Systems</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Git-Internals"><span class="toc-number">10.</span> <span class="toc-text">Git Internals</span></a></li></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://cdn.jsdelivr.net/gh/Eastwood6/Eastwood6.github.io@master/img/TB10Vh7SpXXXXbZaFXXXXXXXXXX-2880-1080.jpg)"><div id="page-header"><span class="pull-left"> <a class="blog_title" id="site-name" href="/">Eastwood</a></span><div class="open toggle-menu pull-right"><div class="menu-icon-first"></div><div class="menu-icon-second"></div><div class="menu-icon-third"></div></div><span class="pull-right menus"><div class="mobile_author_icon"><img class="lozad" data-src="https://cdn.jsdelivr.net/gh/Eastwood6/Eastwood6.github.io@master/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'"><div class="mobile_author-info__description"></div></div><hr><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-coffee"></i><span> 留言板</span></a><a class="site-page" href="/about/"><i class="fa-fw fa fa-user-circle-o"></i><span> 关于</span></a><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a><a class="site-page" href="/recommend/"><i class="fa-fw fa fa-thumbs-up"></i><span> 推荐</span></a><script>document.body.addEventListener('touchstart', function(){ });</script></div></span><span class="pull-right"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></span></div><div id="post-info"><div id="post-title"><div class="posttitle">git pro notes</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-05-15<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-05-15</time><div class="post-meta-wordcount"><span>字数总计: </span><span class="word-count">3k</span><span class="post-meta__separator">|</span><span>阅读时长: 15 分钟</span><span class="post-meta__separator">|</span><span>阅读量: </span><span id="busuanzi_value_page_pv"></span></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><p>pro git 2nd edition<br>%HOMEDRIVE%%HOMEPATH%</p>
+<p>[TOC]</p>
+<h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><h2 id="Git-Basics"><a href="#Git-Basics" class="headerlink" title="Git Basics"></a>Git Basics</h2><p><strong>git较其他vcs特点</strong></p>
+<ul>
+<li>nearly every operation is local</li>
+<li>integrity</li>
+<li>only add</li>
+<li>three states: unmodified,modified,staged<br>(当你对modified文件staged,这些文件保存在staging area,然后会snapshot，当你commit的时候，文件还是在staging area，snapshots永久保存至git repository)</li>
+</ul>
+<hr>
+<ul>
+<li>Getting a Git Repository<br>create local Repository<br><code>git init</code> create a skeleton,if you wanna track these files:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git add *.c</span><br><span class="line">$ git add LICENSE</span><br><span class="line">$ git commit -m &apos;initial project version&apos;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>copy from remote server</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone url (name)</span><br></pre></td></tr></table></figure>
+
+<p><strong>以上文件系统自动帮你commit</strong></p>
+<ul>
+<li>Recording Changes to the Repository</li>
+</ul>
+<ol>
+<li><p>Staging Modified Files:<br>当git add后再修改该文件，git status查看时，会发现<br>Changes to be committed，Changes not staged for commit:<br>都有该文件，git add track 的是当时的版本，修改后并没有重新track</p>
+</li>
+<li><p>Short Status:<br><code>git status -s or git status --short</code><br>左边的表示staged,右边的表示modified，<br>修改一个文件时，是右边的M，add后是左边的M,在修改如果是本地文件是MM，如果是新建文件是AM，未作修改??</p>
+</li>
+<li><p>Ignoring Files<br>语法:  P46 </p>
+<blockquote>
+<p>gitignore只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。</p>
+</blockquote>
+</li>
+<li><p>Viewing Your Staged and Unstaged Changes<br><code>git diff</code><br>git diff 比较的是staging area与原文件的不同<br><code>git diff --staged</code> 比较的是当前staged与last commit区别，如果没有commit，就是原文件<br><code>git diff --cached</code> 展示staged area</p>
+</li>
+<li><p>Committing Your Changes<br>commit之前可以先git status看下是否都在staged area,git commit也会将编辑器选项带过去<br>git commit 你会看到最新git status output,去掉注释或加一段message以留下commit message<br><code>git commit -m “message”</code>直接留下message提交<br><code>git commit -v</code>可以看到即将要提交哪些更改</p>
+</li>
+<li><p>Skipping the Staging Area</p>
+<blockquote>
+<p>command makes Git automatically stage every file that is already <strong>tracked</strong> before doing the commit, letting you skip the git add part</p>
+</blockquote>
+</li>
+</ol>
+<p>跳过git add直接将修改未staged git commit<br><code>git commit -a/git commit -a -m &#39;message&#39;/git commit -am &#39;message&#39;</code></p>
+<ol start="7">
+<li><p>Removing Files<br><code>rm</code>删除working directory文件<br><code>git rm</code>同时删除index(staging area)和working directory文件<br>(<strong>commit 过的文件git rm没有提示，没有commit过的staged file会提示：</strong><code>the following file has changes staged in the index(use --cached to keep the file, or -f to force removal)</code>)(因为没有提交而无法恢复所以怕你误删)<br><code>git rm --cached README</code> git不再tracking README,改为本地保存<br><code>git rm log/\*.log</code> 删除指定目录<br><code>git rm \*~</code>删除所有以<code>*</code>结尾的文件</p>
+<ol start="8">
+<li>Moving Files<br><code>rm/git rm oldname newname;</code></li>
+</ol>
+</li>
+</ol>
+<ul>
+<li><p>Viewing the Commit History<br><code>git log</code> 查看项目提交完整记录<br>显示格式 P58   显示命令P60     显示输出限制P60<br><code>git log -p/-p -num</code> 查看项目提交完整详细记录/查看<strong>最近</strong>指定数目<br><code>git log --stat</code>查看类似 1 file changed, 0 insertions(+), 0 deletions(-)<br><code>git log --pretty=oneline</code> 简略输出一行 )<br><code>git log --pretty=format:&quot;%h %s&quot; --graph</code>(显示我的分支与合并历史)<br><code>git log --grep</code> 搜索commit message里的关键词<br><code>git log -S</code>搜索新增或删除代码里的关键词</p>
+</li>
+<li><p>Undoing Things</p>
+</li>
+</ul>
+<ol>
+<li><code>git commit (-m msg)--amend</code> 再次提交staging area(以防提交后忘了提交某文件或者想修改commit message)</li>
+<li>Unstaging a Staged File<br><code>git reset [FILE]</code></li>
+<li>Unmodifying a Modified File<br><code>git checkout [FILE]</code>(撤销就无法反撤销了，记住commit过的文件都有备份，但没有commit的没有备份)</li>
+</ol>
+<ul>
+<li>Working with Remotes</li>
+</ul>
+<ol>
+<li>Showing Your Remotes<br><code>git remote</code>查看你有配置过哪些remote servers,展示了每个你所明确的简称<br><code>git remote -v</code> 查看简称与url</li>
+<li>Adding Remote Repositories<br><code>git remote add [shortname]  [url]</code></li>
+<li>Fetching and Pulling from Your Remotes<br><code>git fetch [shortname]</code>  远程下载文件到相应分支中,(switch branch and will update automatically)</li>
+</ol>
+<p><code>git pull shortName branchName</code> ,远程下载文件到相应分支中，automatically tries to merge it into the code you’re currently working on.</p>
+<ol start="4">
+<li>Pushing to Your Remotes<br><code>git push shortName branchName( :replaceName )</code> </li>
+</ol>
+<ul>
+<li>(This command works only if you cloned from a server to which you have write access and if nobody has pushed in the meantime)</li>
+<li>push前所做的修改要提交</li>
+<li>(新的branchName会自动创建branch)<br><code>git config --global credential.helper cache</code>(DONT TYPE YOUR PASSWORD EVERY TIME)</li>
+</ul>
+<ol start="5">
+<li>Inspecting a Remote<br><code>git remote show [shortName]</code>(在线查看shortName的branches、 head branch、pull、push url)</li>
+<li>Removing and Renaming Remotes<br><code>git remote rename pb paul</code><br><code>git remote rm paul</code></li>
+</ol>
+<ul>
+<li>Tagging<blockquote>
+<p>Typically people use this functionality to mark release points</p>
+</blockquote>
+</li>
+</ul>
+<ol>
+<li>Listing Your Tags<br><code>git tag</code>  Listing the available tags<br><code>git tag -l (name)</code>   search tag</li>
+<li>Creating Tags</li>
+<li>Annotated Tags<br><code>git tag -a tagname (-m tagMsg)</code><br><code>git tag show</code> tagname  (show  the tag data along with the commit)</li>
+<li>Lightweight Tags<br><code>git tag tagname</code>  (and <code>git tag show</code> dont show any information except commit)</li>
+<li>Tagging Later<br><code>git tag -a tagname commiit checksum (or part of it)</code></li>
+<li>Sharing Tags<br><code>git push origin [tagname]</code><br><code>git push origin --tags</code> (transfer all of your tags to the remote server that are not already there)</li>
+<li>Checking out Tags<br><code>git checkout -b version2 v2.0.0</code> (create a new branch at a specific tag)</li>
+</ol>
+<ul>
+<li>Git Aliases<br><code>git config --global alias.custWords comands</code><br>eg: <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --global alias.co checkout,</span><br><span class="line">git config --global alias.unstage &apos;reset HEAD --&apos;</span><br><span class="line">git config --global alias.last &apos;log -1 HEAD&apos;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="Git-Branching"><a href="#Git-Branching" class="headerlink" title="Git Branching"></a>Git Branching</h2><p>查看Git repository 保存哪些东西 P78<br>(git use the HEAD pointer to which the local branch you’re currently on,when you commit ,it will point to the latest commit automatically,when you use git checkout command,the HEAD switched to the branch you point to)</p>
+<ul>
+<li>Branches in a Nutshell </li>
+</ul>
+<ol>
+<li>Creating a New Branch<br><code>git branch branchName</code>(create a new branch )</li>
+<li>Switching Branches <blockquote>
+<p>note that if your working directory or staging area has uncommitted changes that conflict with the branch you’re checking out, Git won’t let you switch branches</p>
+</blockquote>
+</li>
+</ol>
+<p><code>git checkout branchName</code></p>
+<p><code>git log --oneline --decorate</code> (show which branch you currently are)</p>
+<p><code>git log --oneline --decorate --graph --all</code> (show branch relation map)</p>
+<ul>
+<li>Basic Branching and Merging </li>
+</ul>
+<ol>
+<li>Basic Branching<br><code>git checkout -b branchName</code> (create and enter that branch)<br><code>git branch -d branchName</code> delete a branch</li>
+<li>Basic Merging<br><code>git merge branchName</code></li>
+</ol>
+<p><strong>fast forward</strong>    </p>
+<blockquote>
+<p>To phrase that another way, when you try to merge one commit with a commit that can be reached by following the first commit’s history, Git simplifies things by moving the pointer forward because there is no divergent work to merge together<br><strong>‘recursive’ strategy</strong> p92</p>
+<ol start="3">
+<li>Basic Merge Conflicts<br>If you changed the same part of the same file differently in the two branches you’re merging together, Git won’be able to merge them cleanly<br>you get the warning after command git merge,you update the files,remove the conflict  in the file ,git add,and commit.  </li>
+</ol>
+</blockquote>
+<p><code>git mergetool</code>(list useful tools)</p>
+<p><strong>every updated file is synchronized in each  branch after merging</strong></p>
+<ul>
+<li><p>Branch Management<br><code>git branch</code>  (list branch)<br><code>git branch -v</code>(To see the last commit on each branch)<br><code>git branch --merged</code><br><code>git branch --no-merged</code></p>
+</li>
+<li><p>Branching Workflows </p>
+</li>
+</ul>
+<ol>
+<li><p>Long-Running Branches<br>stable branch-&gt;master<br>parallel branch-&gt;develop/next（used to test stability,whenever it gets to a stable state, it can be merged into master.It’s used to pull in topic branches (short-lived branches, like your earlier iss53 branch) when they’re ready, to make sure they pass all the tests and don’t introduce bugs.）</p>
+</li>
+<li><p>Topic Branches<br>这种工作流其实就是创建多种分支，不同的分支不同的目的，可以merge也可以delete,最终是为了这个Topic，所以叫Topic Branches Workflows</p>
+</li>
+</ol>
+<ul>
+<li>Remote Branches </li>
+</ul>
+<ol>
+<li>Pushing </li>
+<li>Tracking Branches<br><code>git checkout -b sf origin/serverfix</code>  create and use cusName to track remote branch branchName&gt;ones that track branches on other remotes, or don’t track the master branch.</li>
+</ol>
+<p><code>git branch -u origin/serverfix</code></p>
+<p><code>git branch -vv</code>  list out your local branches with more information including what each branch is tracking and if your local branch is ahead, behind or both.</p>
+<ol start="3">
+<li>Pulling</li>
+<li>Deleting Remote Branches<br><code>git push origin --delete serverfix</code> delete your serverfix branch from the server,not local</li>
+</ol>
+<ul>
+<li>Rebasing </li>
+</ul>
+<ol>
+<li><p>The Basic Rebase<br><code>git rebase master</code><br>rebase and merge 最终的snapshot相同只是历史不同，rebase按直线提交，而merge按终点提交</p>
+</li>
+<li><p>More Interesting Rebases<br><code>git rebase [basebranch] [topicbranch]</code> </p>
+</li>
+<li><p>The Perils of Rebasing </p>
+</li>
+<li><p>Rebase When You Rebase </p>
+</li>
+<li><p>Rebase vs. Merge </p>
+<h2 id="Git-on-the-Server"><a href="#Git-on-the-Server" class="headerlink" title="Git on the Server"></a>Git on the Server</h2></li>
+</ol>
+<ul>
+<li>The Protocols 122</li>
+</ul>
+<ol>
+<li><p>Local Protocol 122</p>
+</li>
+<li><p>The HTTP Protocols 123</p>
+</li>
+<li><p>The SSH Protocol 126</p>
+</li>
+<li><p>The Git Protocol 126</p>
+</li>
+</ol>
+<ul>
+<li>Getting Git on a Server 127<br><code>git clone --bare my_project my_project.git</code> clone your repository to create a new bare repository<br><code>cp -Rf my_project/.git my_project.git</code></li>
+</ul>
+<ol>
+<li>Putting the Bare Repository on a Server 128</li>
+</ol>
+<p><code>scp -r my_project.git user@git.example.com:/opt/git</code> store all your<br>Git repositories under the /opt/git directory.<br><code>git clone user@git.example.com:/opt/git/my_project.git</code>other users who have SSH access to the same server which has read-access to the /opt/git directory can clone your repository by running</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ssh user@git.example.com</span><br><span class="line">$ cd /opt/git/my_project.git</span><br><span class="line">$ git init --bare --shared</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>a user SSHs into a server and has write access to the /opt/git/my_project.git directory, they will also automatically have push access.<br>Git will automatically add group write permissions to a repository properly if you run the git init command with the –shared option.</p>
+<ol start="2">
+<li>Small Setups 129</li>
+</ol>
+<ul>
+<li>Generating Your SSH Public Key 130<br>By default, a user’s SSH keys are stored in that user’s ~/.ssh directory</li>
+</ul>
+</blockquote>
+<p><code>ssh-keygen</code>  If you don’t have a pair of files named something like id_dsa or id_rsa (or you don’t even have a .ssh directory)</p>
+<p><a href="https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh" target="_blank" rel="noopener">creating an SSH key</a></p>
+<ul>
+<li>Setting Up the Server 131<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo adduser git</span><br><span class="line">$ su git</span><br><span class="line">$ cd</span><br><span class="line">$ mkdir .ssh &amp;&amp; chmod 700 .ssh</span><br><span class="line">$ touch .ssh/authorized_keys &amp;&amp; chmod 600 .ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>create a git user and a .ssh directory for that user.</p>
+<ul>
+<li><p>Git Daemon 134</p>
+</li>
+<li><p>Smart HTTP 135</p>
+</li>
+<li><p>GitWeb 137</p>
+</li>
+<li><p>GitLab 140</p>
+</li>
+</ul>
+<ol>
+<li><p>Installation 140</p>
+</li>
+<li><p>Administration 141</p>
+</li>
+<li><p>Basic Usage 144</p>
+</li>
+<li><p>Working Together 144</p>
+</li>
+</ol>
+<ul>
+<li>Third Party Hosted Options 145</li>
+</ul>
+<h2 id="Distributed-Git"><a href="#Distributed-Git" class="headerlink" title="Distributed Git"></a>Distributed Git</h2><ul>
+<li>Distributed Workflows 147</li>
+</ul>
+<ol>
+<li><p>Centralized Workflow 147</p>
+</li>
+<li><p>Integration-Manager Workflow 148</p>
+</li>
+<li><p>Dictator and Lieutenants Workflow 149</p>
+</li>
+<li><p>Workflows Summary 150</p>
+</li>
+</ol>
+<ul>
+<li>Contributing to a Project 151</li>
+</ul>
+<ol>
+<li><p>Commit Guidelines 151<br><code>git diff --check</code></p>
+<p>try to make each commit a logically separate changeset </p>
+</li>
+</ol>
+<ul>
+<li>use the staging area on Monday to split your work into at least one commit per issue, with a useful message per commit. If some of the changes modify the same file, try to use git add – patch to partially stage files (covered in detail in “Interactive Staging”).</li>
+<li>The project snapshot at the tip of the branch is identical whether you do one commit or five </li>
+<li>This approach also makes it easier to pull out or revert one of the changesets if you need to later. “Rewriting History” describes a number of useful Git tricks for rewriting history and interactively staging files </li>
+<li>your messages should start with a single line that’s no more than about 50 characters and that describes the changeset concisely, followed by a blank line, followed by a more detailed explanation</li>
+</ul>
+<ol start="2">
+<li><p>Private Small Team 153</p>
+</li>
+<li><p>Private Managed Team 160</p>
+</li>
+</ol>
+<p><strong>开发者无法合并到主分支，需要邮件或联系integrator who merge the branches that already pushed to the server</strong></p>
+<p><code>git push -u origin brannch</code>  设置默认remote server<br><code>git push origin  master:branch</code> master覆盖remote shit branch</p>
+<ol start="4">
+<li>Forked Public Project 166</li>
+</ol>
+<p><strong>开发者无法更新 branch on the project,需要fork project,然后push to the server, pull request</strong><br><code>git push -f myfork featureA</code><br><code>git request-pull origin/master myfork</code></p>
+<ol start="5">
+<li>Public Project over E-Mail 170</li>
+</ol>
+<p><code>git format-patch -M origin/master</code>    it turns each commit into an e-mail message with the first line of the commit message as the subject and the rest of the message plus the patch that the commit introduces as the body.</p>
+<p><code>git send-email *.patch</code>  the file you send must have format-patch as above and setting up in file .config</p>
+<ol start="6">
+<li>Summary 173</li>
+</ol>
+<ul>
+<li>Maintaining a Project 173</li>
+</ul>
+<ol>
+<li><p>Working in Topic Branches 174<br><code>git branch sc/ruby_client master</code> create the branch based off your master branch like this</p>
+</li>
+<li><p>Applying Patches from E-mail 174</p>
+</li>
+<li><p>Checking Out Remote Branches 178</p>
+</li>
+<li><p>Determining What Is Introduced 179</p>
+</li>
+<li><p>Integrating Contributed Work 180</p>
+</li>
+<li><p>Tagging Your Releases 187</p>
+</li>
+<li><p>Generating a Build Number 188</p>
+</li>
+<li><p>Preparing a Release 189</p>
+</li>
+<li><p>The Shortlog 189</p>
+</li>
+</ol>
+<h2 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h2><p>notes:<br><strong>pull request之后，该请求分支里的修改会自动更新到pull request中</strong><br><strong>collaborator是无法merge branch的,所以也有pull request，所以pull request指的都是请求merge branch</strong></p>
+<ul>
+<li>Account Setup and Configuration 191</li>
+</ul>
+<ol>
+<li><p>SSH Access 192</p>
+</li>
+<li><p>Your Avatar 194</p>
+</li>
+<li><p>Your Email Addresses 195</p>
+</li>
+<li><p>Two Factor Authentication 196</p>
+</li>
+</ol>
+<ul>
+<li><p>Contributing to a Project 197</p>
+<ol>
+<li><p>Forking Projects 197</p>
+</li>
+<li><p>The GitHub Flow 198<br><code>git diff master shit</code> 比较branch区别</p>
+</li>
+</ol>
+<p>pull request：<br>当repository有pull request时，对repository有写权限的人才会看到<br>merge pull request button,当你merge时，不会是fast-forward方式，github只会创建merge commit,除非clone到本地操作再push到github,pull request会自动消失</p>
+<ol start="3">
+<li>Advanced Pull Requests 206<br>REFERENCES:<br>可以利用 #  来引用pull request,commit(SHA),issue</li>
+<li>Markdown 211<br>有上面标识默认是markdown格式<br><img src="en-resource://database/1389:1" alt="fd066b49b2130950bd1fcfe88e29a7f1.png"><h6 id="Task-Lists"><a href="#Task-Lists" class="headerlink" title="Task Lists:"></a>Task Lists:</h6>在pull request description里写task list 会在 pull request里看到<br><img src="en-resource://database/1391:1" alt="e8b6842a63e823c12eea086ca3cef036.png"><h6 id="Quoting"><a href="#Quoting" class="headerlink" title="Quoting:"></a>Quoting:</h6>用’&gt;’符号引用一段别人的评论/直接框选一段评论按R key，回复comment<h6 id="Emoji"><a href="#Emoji" class="headerlink" title="Emoji:"></a>Emoji:</h6>start with a <code>:</code> character, an autocompleter will help you find what you’re looking for<h6 id="Images"><a href="#Images" class="headerlink" title="Images:"></a>Images:</h6>you can drag or drop</li>
+</ol>
+</li>
+<li><p>Maintaining a Project 216</p>
+</li>
+</ul>
+<ol>
+<li><p>Creating a New Repository 216</p>
+</li>
+<li><p>Adding Collaborators 218</p>
+</li>
+<li><p>Managing Pull Requests 220</p>
+</li>
+</ol>
+<p><em>将指定pull request保存至本地</em>：
+<code>git ls-remote url</code> get a list of all the branches and tags and other references in the repository</p>
+<p>SHA   refs/heads/sda        –&gt; branches<br>SHA   refs/pull/1/head      –&gt; sha(last commits sha to this (#num)                                           pull request )<br>SHA   refs/pull/3/merge    –&gt; represents the commit that would                             result if you push the “merge”button on the site.<br><code>git fetch origin refs/pull/958/head</code>pull down every Pull Request branch in one go without having to add a bunch of remotes.<br><em>将所有pull request refs保存至本地</em>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[remote &quot;origin&quot;]</span><br><span class="line">url = https://github.com/libgit2/libgit2.git </span><br><span class="line">fetch = +refs/heads/*:refs/remotes/origin/*</span><br><span class="line">fetch = +refs/pull/*/head:refs/remotes/origin/pr/*</span><br></pre></td></tr></table></figure>
+
+<p>编辑.git/config 然后<code>git fetch</code> 到本地refs/remotes/origin/pr/,想切换到哪个分支就<code>git checkout pr/num</code> ，</p>
+<ol start="4">
+<li><p>Mentions and Notifications 225<br>@ character and it will begin to autocomplete with the names and usernames of people who are collaborators or contributors in the project.You can also mention a user who is not in that dropdown</p>
+<ol start="5">
+<li><p>Special Files 229README 229</p>
+</li>
+<li><p>CONTRIBUTING 230</p>
+</li>
+<li><p>Project Administration 230</p>
+</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>Managing an organization 232</li>
+</ul>
+<ol>
+<li><p>Organization Basics 232</p>
+</li>
+<li><p>Teams 233</p>
+</li>
+<li><p>Audit Log 235</p>
+</li>
+</ol>
+<ul>
+<li>Scripting GitHub 236</li>
+</ul>
+<ol>
+<li><p>Hooks 237</p>
+</li>
+<li><p>The GitHub API 241</p>
+</li>
+<li><p>Basic Usage 242</p>
+<ol start="4">
+<li><p>Commenting on an Issue 243</p>
+</li>
+<li><p>Changing the Status of a Pull Request 244</p>
+</li>
+<li><p>Octokit 246</p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="Git-Tools"><a href="#Git-Tools" class="headerlink" title="Git Tools"></a>Git Tools</h2><h2 id="Customizing-Git"><a href="#Customizing-Git" class="headerlink" title="Customizing Git"></a>Customizing Git</h2><h2 id="Git-and-Other-Systems"><a href="#Git-and-Other-Systems" class="headerlink" title="Git and Other Systems"></a>Git and Other Systems</h2><h2 id="Git-Internals"><a href="#Git-Internals" class="headerlink" title="Git Internals"></a>Git Internals</h2><hr>
+<hr>
+<p>issues</p>
+<ol start="2">
+<li>测试： fast forward 合并两个文件同步吗  一个branch amend或commit /master 还在 git branch –merged吗recursive’ strategy呢</li>
+</ol>
+<p>note:</p>
+<ol>
+<li>新创建的要add,本地的原来的不用add</li>
+<li>git commit -a -m ‘’/git commit –amend  区别在于<br>amend只是修改当前提交，做过的修改还要add,<br>而 -a 跳过add命令并创建了一个新提交</li>
+<li>一个分支创建另一个分支 会显示在该分支的git branch –merged里</li>
+</ol>
+<p>ssh:</p>
+<ol>
+<li>xshell登录server时 ，用xshell自带的生成公钥并保存至server authorized_keys中，xshell会自动用私钥登录</li>
+</ol>
+<p>config:<br>git config commands作用在C:\Users\hp.gitconfig里</p>
+<p>email:<br>    .gitconfig可以设置收发人<br>    好像只能发明文<br>    Gmail<a href="https://www.juvenal.me/personal/learning/2017/07/26/using-git-send-email-with-gmail-tls-on-macos/" target="_blank" rel="noopener">详见</a></p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">文 栋</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://www.eastwo.com/2020/05/15/Git Pro Notes/">http://www.eastwo.com/2020/05/15/Git Pro Notes/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://www.eastwo.com">Eastwood</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Git/">-Git    </a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/Eastwood6/Eastwood6.github.io@master/img/https.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-buttom"><i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lozad post-qr-code__img" data-src="/img/wechat.jpg"><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="lozad post-qr-code__img" data-src="/img/alipay.jpg"><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="next-post pull-full"><a href="/2020/05/15/Hexo Grammar/"><img class="next_cover lozad" data-src="https://cdn.jsdelivr.net/gh/Eastwood6/Eastwood6.github.io@master/img/https.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>Hexo Grammar</span></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span> 相关推荐</span></div><div class="relatedPosts_list"></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i> <span>评论</span></div><div class="vcomment" id="vcomment"></div><script src="https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js"></script><script src="https://cdn.jsdelivr.net/npm/valine@v1.3.6/dist/Valine.min.js"></script><script>var notify = 'true' == true ? true : false;
+var verify = 'true' == true ? true : false;
+var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+
+var localeName = 'tw',
+localeMode = {
+    head: {
+        nick: '暱稱(必填)',
+        mail: '郵箱(必填,可以收到回復提醒)',
+        link: '網址(選填)',
+    },
+    tips: {
+        comments: '評論',
+        sofa: '快來做第一個評論的人吧~',
+        busy: '還在提交中，請稍候...',
+        again: '這麼簡單也能錯，也是沒誰了.'
+    },
+    ctrl: {
+        reply: '回覆',
+        ok: '好的',
+        sure: '確認',
+        cancel: '取消',
+        confirm: '確認',
+        continue: '繼續',
+        more: '查看更多...',
+        try: '再試試?',
+        preview: '預覽',
+        emoji: '表情'
+    },
+    error: {
+        99: '初始化失敗，請檢查init中的`el`元素.',
+        100: '初始化失敗，請檢查你的AppId和AppKey.',
+        401: '未經授權的操作，請檢查你的AppId和AppKey.',
+        403: '訪問被api域名白名單拒絕，請檢查你的安全域名設置.',
+    },
+    timeago: {
+        seconds: '秒前',
+        minutes: '分鐘前',
+        hours: '小時前',
+        days: '天前',
+        now: '剛剛'
+    }
+};
+
+window.valine = new Valine();
+valine.installLocale(localeName,localeMode);
+
+valine.init({
+  el:'#vcomment',
+  notify:notify,
+  verify:verify,
+  appId:'MgbteuaCy2jr5rnM2xvPTzS8-gzGzoHsz',
+  appKey:'OoeR8fhNSMhfHAetVr5mKml6',
+  placeholder:'Please leave your footprints',
+  avatar:'monsterid',
+  guest_info:guest_info,
+  pageSize:'10',
+  lang:'en',
+  recordIP: true
+});</script></div></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2019 - 2020 By 文 栋</div><div class="framework-info"><span>驱动 </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div><div class="footer_custom_text">Hi,  welcome  to  my  <a href="https://eastwood6.github.io">blog</a>!</div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><section class="rightside" id="rightside"><i class="fa fa-book" id="readmode" title="阅读模式"> </i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换">簡</a><i class="fa fa-moon-o nightshift" id="nightshift" title="夜间模式"></i></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script async src="/js/search/local-search.js"></script><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="/js/third-party/fireworks.js"></script><script src="/js/nightshift.js"></script><script id="ribbon" src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/js/piao.js"></script><script src="/js/baidupush.js"> </script><script src="/js/activate-power-mode.js"></script><script>POWERMODE.colorful = true; // make power mode colorful
+POWERMODE.shake = true; // turn off shake
+document.body.addEventListener('input', POWERMODE);
+</script><script src="/js/tw_cn.js"></script><script>translateInitilization()
+
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@1.2.2/instantpage.min.js" type="module"></script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div></body></html>
